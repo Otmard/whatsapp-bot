@@ -3,6 +3,7 @@
 /node_modules
 /build
 /sessions
+/.wwebjs_auth
 # Logs
 logs
 *.log
