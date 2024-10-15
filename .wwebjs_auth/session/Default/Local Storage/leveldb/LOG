@@ -1,0 +1,6 @@
+2024/10/14-21:41:03.985 4390 Reusing MANIFEST C:\Users\Otmars\Documents\backends\whatsapp-bot\.wwebjs_auth\session\Default\Local Storage\leveldb/MANIFEST-000001
+2024/10/14-21:41:03.986 4390 Recovering log #7
+2024/10/14-21:41:03.987 4390 Reusing old log C:\Users\Otmars\Documents\backends\whatsapp-bot\.wwebjs_auth\session\Default\Local Storage\leveldb/000007.log 
+2024/10/14-21:42:04.453 48fc Level-0 table #10: started
+2024/10/14-21:42:04.455 48fc Level-0 table #10: 12538 bytes OK
+2024/10/14-21:42:04.457 48fc Delete type=0 #7
