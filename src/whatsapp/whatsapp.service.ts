@@ -10,16 +10,14 @@ export class WhatsappService implements OnModuleInit {
 
 
   constructor(private geminiService: GeminiService) {
-  
+
     // Inicializar el cliente de WhatsApp
     this.client = new Client({
-      authStrategy: new LocalAuth({
-          dataPath: "sessions",
-      }),
-      webVersionCache: {
-          type: 'remote',
-          remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
-      }});
+      authStrategy: new LocalAuth(), puppeteer: {
+        headless: true,
+        args: ['--no-sandbox', '--disable-setuid-sandbox'], // Añadir opciones aquí
+      }, // Usa LocalAuth para guardar sesión
+    },);
 
     // Mostrar QR para autorización de WhatsApp Web
     this.client.on('qr', (qr) => {
