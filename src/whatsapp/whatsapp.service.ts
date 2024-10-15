@@ -7,19 +7,19 @@ const qrcode = require('qrcode-terminal'); // Usando require
 @Injectable()
 export class WhatsappService implements OnModuleInit {
   private client: Client;
-  private apiKey = 'YOUR_GOOGLE_API_KEY'; // Reemplaza con tu clave API de Google
-  private googleAI;
+
 
   constructor(private geminiService: GeminiService) {
-    // Inicializar el cliente de Google Generative AI
-    this.googleAI = new GoogleGenerativeAI({
-      apiKey: this.apiKey,
-    });
-
+  
     // Inicializar el cliente de WhatsApp
     this.client = new Client({
-      authStrategy: new LocalAuth(), // Usa LocalAuth para guardar sesión
-    });
+      authStrategy: new LocalAuth({
+          dataPath: "sessions",
+      }),
+      webVersionCache: {
+          type: 'remote',
+          remotePath: 'https://raw.githubusercontent.com/wppconnect-team/wa-version/main/html/2.2412.54.html',
+      }});
 
     // Mostrar QR para autorización de WhatsApp Web
     this.client.on('qr', (qr) => {
@@ -50,24 +50,8 @@ export class WhatsappService implements OnModuleInit {
       }
     });
   }
-
   // Método para inicializar el cliente de WhatsApp
   onModuleInit() {
     this.client.initialize();
-  }
-
-  // Método para generar texto usando la API de Google Generative AI
-  private async generateText(prompt: string): Promise<string> {
-    try {
-      const response = await this.googleAI.generateMessage({
-        model: 'models/text-bison-001',
-        prompt: `You are a helpful and informative chatbot. ${prompt}`, // Agregar contexto al prompt
-      });
-
-      return response?.candidates[0]?.content || 'No se pudo generar una respuesta.';
-    } catch (error) {
-      console.error('Error generating text from Google AI:', error);
-      return 'Lo siento, hubo un error al obtener una respuesta. Por favor, intenta más tarde.';
-    }
   }
 }
