@@ -20,7 +20,8 @@ export class GeminiService {
                 },
             ],
             generationConfig: {
-                maxOutputTokens: 100,
+                // maxOutputTokens: 100,
+
             },
         });
         const result = await chat.sendMessage(prompt);
